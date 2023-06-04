@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import cors from 'cors'
-import express, { Application, Request, Response } from 'express'
+import express, { Application } from 'express'
 import usersRouter from './app/modules/users/users.route'
 
 const app: Application = express()
@@ -12,9 +13,5 @@ app.use(express.urlencoded({ extended: true }))
 
 // Application Routes
 app.use('/api/v1/users', usersRouter)
-
-app.get('/', async (req: Request, res: Response) => {
-  res.send('Working Successfully')
-})
 
 export default app
