@@ -24,10 +24,14 @@ export type IAcademicSemesterCode = '01' | '02' | '03';
 // Academic Semester Type
 export type IAcademicSemester = {
   title: IAcademicSemesterTitle;
-  year: number;
+  year: string;
   code: IAcademicSemesterCode;
   startMonth: IAcademicSemesterMonth;
   endMonth: IAcademicSemesterMonth;
+};
+// Academic Filters
+export type IAcademicSemesterFilter = {
+  searchTerm?: string;
 };
 
 //
