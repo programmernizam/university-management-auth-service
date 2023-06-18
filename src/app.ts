@@ -33,4 +33,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
+// const testId = async () => {
+//   const result = await generateFacultyId();
+//   console.log(result);
+// };
+// testId();
+
 export default app;
