@@ -20,7 +20,7 @@ app.use(globalErrorHandler);
 
 // Handle Not Found
 app.use((req: Request, res: Response, next: NextFunction) => {
-  res.status(httpStatus.Not_Found as number).json({
+  res.status(httpStatus.NOT_FOUND).json({
     success: false,
     message: 'Not Found',
     errorMessages: [
