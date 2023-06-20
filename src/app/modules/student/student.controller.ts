@@ -15,12 +15,36 @@ const getStudent = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IStudent[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: `User created Successfully`,
+    message: `Students retrieved Successfully`,
     meta: result.meta,
     data: result.data,
   });
 });
 
+const getSingleStudent = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await StudentService.getSingleStudent(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `Student retrieved Successfully`,
+    data: result,
+  });
+});
+
+const deleteStudent = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await StudentService.deleteStudent(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `Student retrieved Successfully`,
+    data: result,
+  });
+});
+
 export const StudentController = {
   getStudent,
+  getSingleStudent,
+  deleteStudent,
 };
