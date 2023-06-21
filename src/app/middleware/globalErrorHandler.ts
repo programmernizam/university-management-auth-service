@@ -5,8 +5,8 @@ import ApiError from '../../errors/ApiError';
 import handleCastError from '../../errors/handleCastError';
 import handleValidationError from '../../errors/handleValidationError';
 import handleZodError from '../../errors/handleZodError';
+import { IGenericErrorMessage } from '../../interface/error';
 import { errorLogger } from '../../shared/logger';
-import { IGenericErrorMessage } from './../interface/error';
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res) => {
   // eslint-disable-next-line no-unused-expressions

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+import { paginationFields } from '../../../constants/pagination';
 import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
-import { paginationFields } from '../../constants/pagination';
 import { studentFilterableFields } from './student.constant';
 import { IStudent } from './student.interface';
 import { StudentService } from './student.service';
@@ -33,8 +33,9 @@ const getSingleStudent = catchAsync(async (req: Request, res: Response) => {
 });
 const updateSingleStudent = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
-  const result = await StudentService.updateSingleStudent(id);
-  sendResponse(res, {
+  const updateData = req.body;
+  const result = await StudentService.updateSingleStudent(id, updateData);
+  sendResponse<IStudent>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: `Student update Successfully`,

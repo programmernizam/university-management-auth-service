@@ -1,7 +1,7 @@
 import { SortOrder } from 'mongoose';
-import { PaginationHelper } from '../../helpers/paginationHelper';
-import { IGenericResponse } from '../../interface/common';
-import { IPaginationOptions } from '../../interface/pagination';
+import { PaginationHelper } from '../../../helpers/paginationHelper';
+import { IGenericResponse } from '../../../interface/common';
+import { IPaginationOptions } from '../../../interface/pagination';
 import { AcademicFaculty } from './academicFaculty.Model';
 import { academicFacultySearchableFields } from './academicFaculty.constants';
 import {
