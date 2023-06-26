@@ -33,7 +33,6 @@ export type IFacultyFilter = {
   email?: string;
   contactNo?: string;
   emergencyContactNo?: string;
-  gender?: 'male' | 'female';
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
   academicDepartment?: string;
   academicFaculty?: string;

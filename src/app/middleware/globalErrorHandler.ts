@@ -1,4 +1,6 @@
-import { ErrorRequestHandler } from 'express';
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
 import config from '../../config';
 import ApiError from '../../errors/ApiError';
@@ -8,7 +10,12 @@ import handleZodError from '../../errors/handleZodError';
 import { IGenericErrorMessage } from '../../interface/error';
 import { errorLogger } from '../../shared/logger';
 
-const globalErrorHandler: ErrorRequestHandler = (err, req, res) => {
+const globalErrorHandler: ErrorRequestHandler = (
+  err,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   // eslint-disable-next-line no-unused-expressions
   config.env === 'development'
     ? // eslint-disable-next-line no-console
@@ -29,6 +36,10 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res) => {
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessage;
+  } else if (err?.name === 'E11000') {
+    statusCode = err?.statusCode;
+    message = err?.message;
+    errorMessages = err?.errorMessage;
   } else if (err?.name === 'CastError') {
     const simplifiedError = handleCastError(err);
     statusCode = simplifiedError.statusCode;
