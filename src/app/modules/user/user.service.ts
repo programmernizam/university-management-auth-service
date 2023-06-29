@@ -168,16 +168,16 @@ const createAdmin = async (
     await session.endSession();
     throw error;
   }
-  // if (newUserAllData) {
-  //   newUserAllData = await User.findOne({ id: newUserAllData.id }).populate({
-  //     path: 'admin',
-  //     populate: [
-  //       {
-  //         path: 'managementDepartment',
-  //       },
-  //     ],
-  //   });
-  // }
+  if (newUserAllData) {
+    newUserAllData = await User.findOne({ id: newUserAllData.id }).populate({
+      path: 'admin',
+      populate: [
+        {
+          path: 'managementDepartment',
+        },
+      ],
+    });
+  }
   return newUserAllData;
 };
 

@@ -2,9 +2,9 @@
 import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
 import config from '../../../config';
-import { IUser, IUserMethods, UserModel } from './user.interface';
+import { IUser, UserModel } from './user.interface';
 
-const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
+const userSchema = new Schema<IUser, UserModel>(
   {
     id: {
       type: String,
@@ -45,18 +45,38 @@ const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
   }
 );
 
-// User Exist Check with instance method
-userSchema.methods.isUserExist = async function (
+// // User Exist Check with instance method
+// userSchema.methods.isUserExist = async function (
+//   id: string
+// ): Promise<Partial<IUser | null>> {
+//   return await User.findOne(
+//     { id },
+//     { id: 1, password: 1, needPasswordChange: 1 }
+//   );
+// };
+
+// // User Password Check with instance method
+// userSchema.methods.isPasswordMatched = async function (
+//   givenPassword: string,
+//   savedPassword: string
+// ): Promise<boolean> {
+//   return await bcrypt.compare(givenPassword, savedPassword);
+// };
+
+userSchema.statics.isUserExist = async function (
   id: string
-): Promise<Partial<IUser | null>> {
+): Promise<Pick<
+  IUser,
+  'id' | 'password' | 'needPasswordChange' | 'role'
+> | null> {
   return await User.findOne(
     { id },
-    { id: 1, password: 1, needPasswordChange: 1 }
+    { id: 1, password: 1, needPasswordChange: 1, role: 1 }
   );
 };
 
-// User Password Check with instance method
-userSchema.methods.isPasswordMatched = async function (
+// User Password Check with statics
+userSchema.statics.isPasswordMatched = async function (
   givenPassword: string,
   savedPassword: string
 ): Promise<boolean> {
